@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ReactLenis } from 'lenis/react';
 import { useTheme } from './hooks/useTheme';
 import { DashboardLayout } from './components/DashboardLayout';
@@ -12,6 +12,7 @@ const Home = lazy(() => import('./pages/Home').then(module => ({ default: module
 const TopicPage = lazy(() => import('./pages/TopicPage').then(module => ({ default: module.TopicPage })));
 const Favorites = lazy(() => import('./pages/Favorites').then(module => ({ default: module.Favorites })));
 const Admin = lazy(() => import('./pages/Admin').then(module => ({ default: module.Admin })));
+const NotFound = lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
 
 function App() {
   const { theme, toggleTheme } = useTheme();
@@ -26,7 +27,7 @@ function App() {
               <Route path="/topic/:topicId" element={<TopicPage />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/admin" element={<Admin />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </DashboardLayout>
